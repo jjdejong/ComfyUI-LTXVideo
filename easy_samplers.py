@@ -60,6 +60,34 @@ def _split_av_latent_dict(latent_dict):
     return result, audio
 
 
+def _guard_av_nan(stage, video_latent_dict, audio_tensor, sanitize=True):
+    """Localize and (optionally) contain NaN/Inf in an extend-tile sample stage.
+
+    Logs which stream (video/audio) first went non-finite at which stage so the
+    extend-tile NaN can be pinned to a specific sigma split, and replaces the bad
+    values with zeros so a single bad stat can't propagate to the whole clip.
+    Returns the (possibly sanitized) (video_latent_dict, audio_tensor).
+    """
+    def _report(name, tensor):
+        if tensor is None:
+            return tensor
+        n_nan = torch.isnan(tensor).sum().item()
+        n_inf = torch.isinf(tensor).sum().item()
+        if n_nan or n_inf:
+            print(
+                f"[ExtendSampler][NaN-guard] {stage}: {name} non-finite "
+                f"(NaN={n_nan}, Inf={n_inf}, shape={tuple(tensor.shape)})"
+            )
+            if sanitize:
+                tensor = torch.nan_to_num(tensor, nan=0.0, posinf=0.0, neginf=0.0)
+        return tensor
+
+    if video_latent_dict is not None and "samples" in video_latent_dict:
+        video_latent_dict["samples"] = _report("video", video_latent_dict["samples"])
+    audio_tensor = _report("audio", audio_tensor)
+    return video_latent_dict, audio_tensor
+
+
 def _get_raw_conds_from_guider(guider):
     if not hasattr(guider, "raw_conds"):
         if "negative" not in guider.original_conds:
@@ -610,6 +638,9 @@ class LTXVExtendSampler:
                 latent_image=_av,
             )
             new_latents, _audio_extend_tile = _split_av_latent_dict(new_latents)
+            new_latents, _audio_extend_tile = _guard_av_nan(
+                "high_sigmas", new_latents, _audio_extend_tile
+            )
 
         if optional_guiding_latents is not None:
             optional_guiding_latents = LTXVSelectLatents().select_latents(
@@ -657,6 +688,9 @@ class LTXVExtendSampler:
             latent_image=_av,
         )
         denoised_output_latents, _audio_extend_tile = _split_av_latent_dict(denoised_output_latents)
+        denoised_output_latents, _audio_extend_tile = _guard_av_nan(
+            "middle_sigmas", denoised_output_latents, _audio_extend_tile
+        )
 
         positive, negative, denoised_output_latents = LTXVCropGuides.execute(
             positive=positive,
@@ -717,6 +751,9 @@ class LTXVExtendSampler:
                 latent_image=_av,
             )
             denoised_output_latents, _audio_extend_tile = _split_av_latent_dict(denoised_output_latents)
+            denoised_output_latents, _audio_extend_tile = _guard_av_nan(
+                "low_sigmas", denoised_output_latents, _audio_extend_tile
+            )
             positive, negative, denoised_output_latents = LTXVCropGuides.execute(
                 positive=positive,
                 negative=negative,

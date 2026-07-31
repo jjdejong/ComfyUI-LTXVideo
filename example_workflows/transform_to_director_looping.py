@@ -180,14 +180,17 @@ def main():
             {"name": "start_image", "type": "IMAGE", "links": [], "slot_index": 6},
         ],
         "properties": {"Node name for S&R": "LTXLoopingBridge"},
-        # widgets_values is positional over EVERY widget-eligible input, in schema
-        # order -- including ones this graph never wires. Omitting timeline_data here
-        # shifted temporal_tile_size / temporal_overlap onto the wrong entries, so they
-        # arrived as empty strings and failed INT conversion. clip and guide_data are
-        # link-only (not widgets) and correctly have no slot.
-        # order: local_prompts, segment_lengths, timeline_data,
-        #        temporal_tile_size, temporal_overlap, global_prompt, frame_rate
-        "widgets_values": ["", "", "", 240, 64, global_prompt, 24],
+        # widgets_values is positional over every widget-eligible input, ordered
+        # REQUIRED FIRST, THEN OPTIONAL -- not by declaration order. temporal_tile_size
+        # and temporal_overlap are declared without optional=True, so they land in
+        # required and sort ahead of the optional strings, even though they appear
+        # later in the source. Using declaration order here fed them the leading ""
+        # entries and they failed INT conversion. Verify against
+        #   curl -s localhost:8188/object_info/LTXLoopingBridge
+        # clip and guide_data are link-only types and take no widget slot.
+        # order: temporal_tile_size, temporal_overlap, local_prompts,
+        #        segment_lengths, timeline_data, global_prompt, frame_rate
+        "widgets_values": [240, 64, "", "", "", global_prompt, 24],
         "title": "LTX Looping Bridge",
     }
     wf["nodes"].append(bridge)

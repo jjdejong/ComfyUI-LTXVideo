@@ -1275,7 +1275,7 @@
           ]
         }
       ],
-      "title": "FPS→Int",
+      "title": "FPS\u2192Int",
       "properties": {
         "cnr_id": "ComfyMath",
         "ver": "c01177221c31b8e5fbc062778fc8254aeb541638",
@@ -1735,7 +1735,7 @@
       ],
       "flags": {},
       "order": 134,
-      "mode": 0,
+      "mode": 4,
       "inputs": [
         {
           "name": "video_latent",
@@ -1783,7 +1783,7 @@
         "collapsed": true
       },
       "order": 29,
-      "mode": 0,
+      "mode": 4,
       "inputs": [],
       "outputs": [
         {
@@ -1819,7 +1819,7 @@
         "collapsed": true
       },
       "order": 30,
-      "mode": 0,
+      "mode": 4,
       "inputs": [],
       "outputs": [
         {
@@ -1855,7 +1855,7 @@
         "collapsed": true
       },
       "order": 31,
-      "mode": 0,
+      "mode": 4,
       "inputs": [],
       "outputs": [
         {
@@ -1889,7 +1889,7 @@
       ],
       "flags": {},
       "order": 81,
-      "mode": 0,
+      "mode": 4,
       "inputs": [
         {
           "name": "model",
@@ -1944,7 +1944,7 @@
         "collapsed": true
       },
       "order": 32,
-      "mode": 0,
+      "mode": 4,
       "inputs": [],
       "outputs": [
         {
@@ -1980,7 +1980,7 @@
         "collapsed": true
       },
       "order": 33,
-      "mode": 0,
+      "mode": 4,
       "inputs": [],
       "outputs": [
         {
@@ -2016,7 +2016,7 @@
         "collapsed": true
       },
       "order": 34,
-      "mode": 0,
+      "mode": 4,
       "inputs": [],
       "outputs": [
         {
@@ -2052,7 +2052,7 @@
         "collapsed": true
       },
       "order": 35,
-      "mode": 0,
+      "mode": 4,
       "inputs": [],
       "outputs": [
         {
@@ -2088,7 +2088,7 @@
         "collapsed": true
       },
       "order": 36,
-      "mode": 0,
+      "mode": 4,
       "inputs": [],
       "outputs": [
         {
@@ -2124,7 +2124,7 @@
         "collapsed": true
       },
       "order": 37,
-      "mode": 0,
+      "mode": 4,
       "inputs": [],
       "outputs": [
         {
@@ -2160,7 +2160,7 @@
         "collapsed": true
       },
       "order": 38,
-      "mode": 0,
+      "mode": 4,
       "inputs": [],
       "outputs": [
         {
@@ -2194,7 +2194,7 @@
       ],
       "flags": {},
       "order": 39,
-      "mode": 0,
+      "mode": 4,
       "inputs": [],
       "outputs": [
         {
@@ -2230,7 +2230,7 @@
       ],
       "flags": {},
       "order": 40,
-      "mode": 0,
+      "mode": 4,
       "inputs": [],
       "outputs": [
         {
@@ -2265,7 +2265,7 @@
       ],
       "flags": {},
       "order": 41,
-      "mode": 0,
+      "mode": 4,
       "inputs": [],
       "outputs": [
         {
@@ -2522,7 +2522,7 @@
       ],
       "flags": {},
       "order": 135,
-      "mode": 0,
+      "mode": 4,
       "inputs": [
         {
           "name": "model",
@@ -2625,7 +2625,7 @@
           ]
         }
       ],
-      "title": "Stage 2 — Refine",
+      "title": "Stage 2 \u2014 Refine",
       "properties": {
         "cnr_id": "ComfyUI-LTXVideo",
         "ver": "adfe33778b43ddc103bfb5feb2d4915b4a29df58",
@@ -3079,7 +3079,7 @@
       ],
       "flags": {},
       "order": 131,
-      "mode": 0,
+      "mode": 4,
       "inputs": [
         {
           "name": "av_latent",
@@ -3128,7 +3128,7 @@
         "collapsed": true
       },
       "order": 56,
-      "mode": 0,
+      "mode": 4,
       "inputs": [],
       "outputs": [
         {
@@ -3164,7 +3164,7 @@
         "collapsed": true
       },
       "order": 57,
-      "mode": 0,
+      "mode": 4,
       "inputs": [],
       "outputs": [
         {
@@ -3198,7 +3198,7 @@
       ],
       "flags": {},
       "order": 132,
-      "mode": 0,
+      "mode": 4,
       "inputs": [
         {
           "name": "samples",
@@ -3799,7 +3799,7 @@
         "collapsed": true
       },
       "order": 106,
-      "mode": 0,
+      "mode": 4,
       "inputs": [
         {
           "name": "sigmas",
@@ -3830,6 +3830,38 @@
         0,
         -1
       ]
+    },
+    {
+      "id": 200,
+      "type": "PreviewImage",
+      "pos": [
+        3169.3881092316433,
+        148.91532964132654
+      ],
+      "size": [
+        282.0597694319408,
+        260.6395656720356
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 117,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 160
+        }
+      ],
+      "outputs": [],
+      "title": "Sigma Visual",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.16.4",
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
     },
     {
       "id": 21,
@@ -4332,7 +4364,7 @@
           ]
         }
       ],
-      "title": "Stage 1 — Generate",
+      "title": "Stage 1 \u2014 Generate",
       "properties": {
         "cnr_id": "ComfyUI-LTXVideo",
         "ver": "adfe33778b43ddc103bfb5feb2d4915b4a29df58",
@@ -4358,38 +4390,6 @@
       "bgcolor": "#223322"
     },
     {
-      "id": 200,
-      "type": "PreviewImage",
-      "pos": [
-        3116.7472384821003,
-        141.65451988276897
-      ],
-      "size": [
-        282.0597694319408,
-        260.6395656720356
-      ],
-      "flags": {
-        "collapsed": false
-      },
-      "order": 117,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 160
-        }
-      ],
-      "outputs": [],
-      "title": "Sigma Visual",
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.16.4",
-        "Node name for S&R": "PreviewImage"
-      },
-      "widgets_values": []
-    },
-    {
       "id": 300,
       "type": "LTXDirector",
       "pos": [
@@ -4397,8 +4397,8 @@
         1650
       ],
       "size": [
-        1120,
-        777
+        1380,
+        1000
       ],
       "flags": {},
       "order": 300,
@@ -4424,6 +4424,12 @@
           "name": "optional_latent",
           "shape": 7,
           "type": "LATENT",
+          "link": null
+        },
+        {
+          "name": "global_prompt",
+          "shape": 7,
+          "type": "STRING",
           "link": null
         }
       ],
@@ -4458,6 +4464,11 @@
           ]
         },
         {
+          "name": "motion_guide_data",
+          "type": "MOTION_GUIDE_DATA",
+          "links": []
+        },
+        {
           "name": "frame_rate",
           "type": "FLOAT",
           "links": [
@@ -4475,7 +4486,7 @@
           "links": [
             177
           ],
-          "slot_index": 7
+          "slot_index": 8
         },
         {
           "name": "segment_lengths",
@@ -4483,7 +4494,7 @@
           "links": [
             178
           ],
-          "slot_index": 8
+          "slot_index": 9
         },
         {
           "name": "global_prompt",
@@ -4491,25 +4502,63 @@
           "links": [
             101
           ],
-          "slot_index": 9
+          "slot_index": 10
         }
       ],
       "properties": {
         "cnr_id": "whatdreamscost-comfyui",
-        "ver": "5cae3c00186ff2eb79771070f05a2c4e02f329bb",
+        "ver": "2.0.0",
         "Node name for S&R": "LTXDirector",
-        "aux_id": "kijai/ComfyUI-PromptRelay"
+        "global_prompt": "",
+        "mainTrackEnabled": true,
+        "audioTrackEnabled": true,
+        "motionTrackEnabled": true,
+        "audioTrackWasEnabledBeforeOverride": false,
+        "inpaint_audio": true,
+        "override_audio": false,
+        "overrideAudio": false,
+        "showFilenames": true,
+        "use_custom_audio": true,
+        "use_custom_motion": true,
+        "frame_rate": 24,
+        "display_mode": "seconds",
+        "custom_width": 0,
+        "custom_height": 0,
+        "resize_method": "maintain aspect ratio",
+        "divisible_by": 32,
+        "img_compression": 18,
+        "guide_strength": "",
+        "local_prompts": "",
+        "segment_lengths": "",
+        "timeline_data": "{\"mainTrackEnabled\":true,\"audioTrackEnabled\":true,\"motionTrackEnabled\":true,\"propHeight\":90,\"globalPropHeight\":60,\"showFilenames\":true,\"overrideAudio\":false,\"inpaint_audio\":true,\"global_prompt\":\"\",\"retake_global_prompt\":\"\",\"retakeMode\":false,\"retakeStart\":24,\"retakeLength\":48,\"retakePrompt\":\"\",\"retakeStrength\":1,\"retakeVideo\":null,\"normalStartFrame\":0,\"normalDurationFrames\":120,\"segments\":[],\"motionSegments\":[],\"audioSegments\":[]}",
+        "epsilon": 0.001,
+        "start_second": 0,
+        "end_second": 5,
+        "duration_seconds": 5,
+        "start_frame": 0,
+        "end_frame": 120,
+        "duration_frames": 120,
+        "timeline_ui": "",
+        "has_serialized_properties": true,
+        "propHeight": 90,
+        "globalPropHeight": 60,
+        "retakeMode": false
       },
       "widgets_values": [
-        "",
-        120,
+        0,
         5,
-        "{\"segments\":[],\"audioSegments\":[]}",
+        5,
+        0,
+        120,
+        120,
+        "{\"mainTrackEnabled\":true,\"audioTrackEnabled\":true,\"motionTrackEnabled\":true,\"propHeight\":90,\"globalPropHeight\":60,\"showFilenames\":true,\"overrideAudio\":false,\"inpaint_audio\":true,\"global_prompt\":\"\",\"retake_global_prompt\":\"\",\"retakeMode\":false,\"retakeStart\":24,\"retakeLength\":48,\"retakePrompt\":\"\",\"retakeStrength\":1,\"retakeVideo\":null,\"normalStartFrame\":0,\"normalDurationFrames\":120,\"segments\":[],\"motionSegments\":[],\"audioSegments\":[]}",
         "",
         "",
         0.001,
         "",
-        false,
+        true,
+        true,
+        true,
         24,
         "seconds",
         0,
@@ -4517,6 +4566,7 @@
         "maintain aspect ratio",
         32,
         18,
+        false,
         ""
       ]
     },
@@ -4735,7 +4785,7 @@
     [
       4,
       300,
-      5,
+      6,
       112,
       0,
       "FLOAT"
@@ -5287,7 +5337,7 @@
     [
       101,
       300,
-      9,
+      10,
       170,
       0,
       "STRING"
@@ -5527,7 +5577,7 @@
     [
       177,
       300,
-      7,
+      8,
       301,
       2,
       "STRING"
@@ -5535,7 +5585,7 @@
     [
       178,
       300,
-      8,
+      9,
       301,
       3,
       "STRING"
@@ -5710,17 +5760,17 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.6886284266168825,
+      "scale": 0.6172339913336811,
       "offset": [
-        792.7624269880043,
-        310.65188983274476
+        491.1043748838338,
+        477.8909629454897
       ]
     },
-    "frontendVersion": "1.43.18",
     "info": {
       "name": "LTX-2.3 Director Looping",
       "description": "Two-pass AV I2V looping driven by an LTX Director timeline through the LTX Looping Bridge: one prompt per temporal tile (by timeline position) + keyframes. Author the Director timeline, then paste its local_prompts and segment_lengths into the bridge."
     },
+    "frontendVersion": "1.43.18",
     "VHS_latentpreview": true,
     "VHS_latentpreviewrate": 0,
     "VHS_MetadataImage": true,

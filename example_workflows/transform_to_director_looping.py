@@ -37,8 +37,16 @@ HERE = os.path.dirname(__file__)
 BASE = os.path.join(HERE, "LTX-2.3_Two_Pass_I2V_Looping.json")
 DIRECTOR_SRC = os.path.join(
     HERE, "..", "..", "WhatDreamsCost-ComfyUI", "example_workflows",
-    "LTX Director Example Workflow (Fixed).json",
+    "LTX_Director_2_Workflow_Hotfix.json",
 )
+
+# Director's own output count, i.e. the first slot index our appended passthroughs
+# get. Upstream v2.0.4 inserted motion_guide_data at slot 5, shifting frame_rate ->
+# 6 and combined_audio -> 7; a workflow generated against the older layout wires
+# frame_rate to a MOTION_GUIDE_DATA socket and fails validation. Derived from the
+# donor node below rather than hardcoded, so the next upstream insertion is caught.
+DIRECTOR_BASE_OUTPUTS = 8
+DIRECTOR_SLOT_FRAME_RATE = 6
 OUT = os.path.join(HERE, "LTX-2.3_Director_Looping.json")
 
 DIRECTOR_ID = 300
@@ -121,17 +129,24 @@ def main():
         ip["link"] = None
     for op in director.get("outputs", []):
         op["links"] = []
-    # Patched LTXDirector exposes two extra passthrough outputs (slots 7, 8) so the
-    # bridge can be wired directly instead of pasting the two widget values.
-    director["outputs"].append(
-        {"name": "local_prompts", "type": "STRING", "links": [], "slot_index": 7}
-    )
-    director["outputs"].append(
-        {"name": "segment_lengths", "type": "STRING", "links": [], "slot_index": 8}
-    )
-    director["outputs"].append(
-        {"name": "global_prompt", "type": "STRING", "links": [], "slot_index": 9}
-    )
+    # Patched LTXDirector exposes three extra passthrough outputs so the bridge can be
+    # wired directly instead of pasting the widget values. They are appended after
+    # Director's own outputs, so their slot indices follow the donor's output count --
+    # never hardcode them (see DIRECTOR_BASE_OUTPUTS).
+    base = len(director["outputs"])
+    if base != DIRECTOR_BASE_OUTPUTS:
+        raise SystemExit(
+            f"Donor LTXDirector has {base} outputs, expected {DIRECTOR_BASE_OUTPUTS}. "
+            "Upstream changed the output layout; update DIRECTOR_BASE_OUTPUTS and "
+            "DIRECTOR_SLOT_FRAME_RATE, then re-check every Director slot reference below."
+        )
+    for offset, name in enumerate(("local_prompts", "segment_lengths", "global_prompt")):
+        director["outputs"].append(
+            {"name": name, "type": "STRING", "links": [], "slot_index": base + offset}
+        )
+    SLOT_LOCAL_PROMPTS = base
+    SLOT_SEGMENT_LENGTHS = base + 1
+    SLOT_GLOBAL_PROMPT = base + 2
     wf["nodes"].append(director)
     nodes[DIRECTOR_ID] = director
 
@@ -179,8 +194,8 @@ def main():
     new_link(12, 0, DIRECTOR_ID, 2, "VAE")     # audio VAE    -> Director.audio_vae
     new_link(11, 0, BRIDGE_ID, 0, "CLIP")      # CLIP         -> Bridge.clip
     new_link(DIRECTOR_ID, 4, BRIDGE_ID, 1, "GUIDE_DATA")     # guide_data      -> Bridge
-    new_link(DIRECTOR_ID, 7, BRIDGE_ID, 2, "STRING")         # local_prompts   -> Bridge (auto, no paste)
-    new_link(DIRECTOR_ID, 8, BRIDGE_ID, 3, "STRING")         # segment_lengths -> Bridge (auto, no paste)
+    new_link(DIRECTOR_ID, SLOT_LOCAL_PROMPTS, BRIDGE_ID, 2, "STRING")     # local_prompts   -> Bridge (auto, no paste)
+    new_link(DIRECTOR_ID, SLOT_SEGMENT_LENGTHS, BRIDGE_ID, 3, "STRING")   # segment_lengths -> Bridge (auto, no paste)
 
     get_id = [310]
 
@@ -222,13 +237,13 @@ def main():
     repoint("tile_prompt_conditioning", BRIDGE_ID, 0)
     repoint("scheduled_reference_images", BRIDGE_ID, 1)
     repoint("reference_indices", BRIDGE_ID, 2)
-    # Director's global_prompt (slot 9) is the single global source.
-    repoint("global_prompt", DIRECTOR_ID, 9)
-    # Timing single-sourced from the bridge; fps from Director.frame_rate (slot 5).
+    # Director's global_prompt passthrough is the single global source.
+    repoint("global_prompt", DIRECTOR_ID, SLOT_GLOBAL_PROMPT)
+    # Timing single-sourced from the bridge; fps from Director.frame_rate.
     repoint("temporal_tile_size", BRIDGE_ID, 3)
     repoint("temporal_overlap", BRIDGE_ID, 4)
     repoint("frame_count", BRIDGE_ID, 5)
-    repoint("fps", DIRECTOR_ID, 5)
+    repoint("fps", DIRECTOR_ID, DIRECTOR_SLOT_FRAME_RATE)
 
     # ── 5. Rewire consumers of removed nodes ──
     # Guider base positive from Director.positive (slot 1) instead of the dropped encode (20).
@@ -283,11 +298,22 @@ def main():
         ),
     }
 
+    # VHS_VideoCombine serializes its last preview into widgets_values, which bakes an
+    # absolute output path from whoever last ran the base workflow. It is stale UI state,
+    # not config -- VHS rebuilds it on the next run -- so drop it rather than ship it.
+    stripped = 0
+    for n in wf["nodes"]:
+        wv = n.get("widgets_values")
+        if isinstance(wv, dict) and wv.pop("videopreview", None) is not None:
+            stripped += 1
+
     validate(wf)
 
     with open(OUT, "w") as f:
         json.dump(wf, f, indent=2)
     print(f"Wrote {OUT}")
+    if stripped:
+        print(f"  stripped stale videopreview from {stripped} node(s)")
     print(f"  {len(wf['nodes'])} nodes, {len(wf['links'])} links; pruned GetNodes: {pruned}")
 
 

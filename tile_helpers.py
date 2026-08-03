@@ -90,6 +90,8 @@ class LTXVTileReferencePrompts(io.ComfyNode):
             inputs=[
                 io.String.Input(
                     "global_prompt",
+                    display_name="Global Prompt",
+                    optional=True,
                     multiline=True,
                     default="",
                     dynamic_prompts=True,
@@ -121,10 +123,11 @@ class LTXVTileReferencePrompts(io.ComfyNode):
     @classmethod
     def execute(
         cls,
-        global_prompt: str,
         images: io.Autogrow.Type,
         prompts: io.Autogrow.Type,
+        global_prompt: str = "",
     ) -> io.NodeOutput:
+        global_prompt = global_prompt or ""
         image_values = _ordered_values(images, "image")
         prompt_values = _ordered_values(prompts or {}, "prompt")
 

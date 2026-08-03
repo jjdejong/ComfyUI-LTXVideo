@@ -57,6 +57,7 @@ from .stg import (
 )
 from .tiled_sampler import LTXVTiledSampler
 from .tiled_vae_decode import LTXVTiledVAEDecode
+from .tile_helpers import LTXVTileReferencePrompts
 from .tricks import NODE_CLASS_MAPPINGS as TRICKS_NODE_CLASS_MAPPINGS
 from .tricks import NODE_DISPLAY_NAME_MAPPINGS as TRICKS_NODE_DISPLAY_NAME_MAPPINGS
 from .utiltily_nodes import FloatToInt, ImageToCPU, LTXVLoopingReferenceSchedule
@@ -98,6 +99,7 @@ NODE_CLASS_MAPPINGS = {
     "ImageToCPU": ImageToCPU,
     "LTXFloatToInt": FloatToInt,
     "LTXVLoopingReferenceSchedule": LTXVLoopingReferenceSchedule,
+    "LTXVTileReferencePrompts": LTXVTileReferencePrompts,
     "LTXVStatNormLatent": LTXVStatNormLatent,
     "LTXVPerStepStatNormPatcher": LTXVPerStepStatNormPatcher,
     "LTXVGemmaCLIPModelLoader": LTXVGemmaCLIPModelLoader,

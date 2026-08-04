@@ -107,6 +107,19 @@ class LTXVLoopingReferenceSchedule:
                     },
                 ),
             },
+            "optional": {
+                "reference_indices_override": (
+                    "STRING",
+                    {
+                        "default": "",
+                        "tooltip": (
+                            "Optional comma-separated replacement for the generated "
+                            "reference indices. Remove an index to leave that tile "
+                            "without an image keyframe; leave empty to use the schedule."
+                        ),
+                    },
+                ),
+            },
         }
 
     RETURN_TYPES = ("IMAGE", "INT", "INT", "INT", "STRING", "INT")
@@ -134,6 +147,7 @@ class LTXVLoopingReferenceSchedule:
         tile_duration,
         overlap_duration,
         reference_offset,
+        reference_indices_override="",
     ):
         frame_count = max(
             self.TIME_SCALE + 1,
@@ -180,6 +194,44 @@ class LTXVLoopingReferenceSchedule:
                 target_count - source_count, 1, 1, 1
             )
             scheduled_images = torch.cat((reference_images, repeated_last), dim=0)
+
+        if reference_indices_override and reference_indices_override.strip():
+            try:
+                edited_indices = [
+                    int(value.strip())
+                    for value in reference_indices_override.split(",")
+                    if value.strip()
+                ]
+            except ValueError as error:
+                raise ValueError(
+                    "reference_indices_override must be a comma-separated list of integers"
+                ) from error
+
+            if not edited_indices:
+                raise ValueError(
+                    "reference_indices_override must retain at least one reference index"
+                )
+            if len(set(edited_indices)) != len(edited_indices):
+                raise ValueError(
+                    "reference_indices_override must not contain duplicate indices"
+                )
+
+            index_to_position = {
+                index: position for position, index in enumerate(reference_indices)
+            }
+            missing_indices = [
+                index for index in edited_indices if index not in index_to_position
+            ]
+            if missing_indices:
+                raise ValueError(
+                    "reference_indices_override contains indices that are not in "
+                    f"the generated schedule: {missing_indices}"
+                )
+
+            scheduled_images = scheduled_images[
+                [index_to_position[index] for index in edited_indices]
+            ]
+            reference_indices = edited_indices
 
         return (
             scheduled_images,

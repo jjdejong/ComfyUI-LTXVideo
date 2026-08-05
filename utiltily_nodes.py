@@ -74,6 +74,7 @@ class ImageToCPU:
 @comfy_node(description="Looping Reference Schedule")
 class LTXVLoopingReferenceSchedule:
     TIME_SCALE = 8
+    MIN_REFERENCE_OFFSET = 0.35
 
     @classmethod
     def INPUT_TYPES(cls):
@@ -100,7 +101,7 @@ class LTXVLoopingReferenceSchedule:
                     "FLOAT",
                     {
                         "default": 16 / 24,
-                        "min": 0.1,
+                        "min": cls.MIN_REFERENCE_OFFSET,
                         "max": 3600.0,
                         "step": 0.1,
                         "tooltip": "Reference position as seconds before the end of each tile.",
@@ -159,7 +160,7 @@ class LTXVLoopingReferenceSchedule:
         overlap = self._aligned_frames(overlap_duration, frame_rate, 16)
         overlap = min(overlap, 80, tile_size - self.TIME_SCALE)
         reference_margin = self._aligned_frames(
-            reference_offset, frame_rate, self.TIME_SCALE
+            max(reference_offset, self.MIN_REFERENCE_OFFSET), frame_rate, 0
         )
         reference_margin = min(reference_margin, tile_size - self.TIME_SCALE)
 

@@ -25,14 +25,16 @@ DEFAULT_LATE_REFERENCE_OFFSET = 16 / DEFAULT_FRAME_RATE
 DEFAULT_FINAL_HEIGHT = 1088
 
 GLOBAL_PROMPT = (
-    "A cinematic live-action scene with the same subject, wardrobe, lighting, "
-    "and location throughout. Natural motion, stable anatomy, coherent audio."
+    "A cinematic live-action continuous shot with consistent subject identity, "
+    "wardrobe, lighting, and environment. The action continues naturally across "
+    "the shot without a reset or cut. Diegetic audio remains coherent with the "
+    "action."
 )
 TILE_SNIPPETS = [
-    "The subject enters the shot and begins the action.",
-    "The action continues with a small camera move.",
-    "The subject completes the central beat.",
-    "The motion settles into the ending pose.",
+    "The subject maintains the established action with natural timing while the camera slowly reframes.",
+    "The subject carries the movement through a clear physical beat with coherent anatomy as the camera continues its gentle move.",
+    "The subject develops the action into its central beat with realistic timing while the camera gradually settles into the new composition.",
+    "The subject completes the movement and settles naturally into the ending pose as the camera finishes its move and holds the composition.",
 ]
 
 
@@ -335,14 +337,17 @@ def multi_prompt_provider(nid: int, pos: tuple[int, int], clip_id: int):
         nid,
         "MultiPromptProvider",
         pos,
-        [""],
+        ["", 24],
         (400, 220),
         title="Per-Tile Prompts From Global + Snippets",
     )
     inp(nid, "prompts", "STRING", widget=True)
     inp(nid, "clip", "CLIP")
+    inp(nid, "frame_rate", "FLOAT", widget=True)
     out(nid, "conditionings", "CONDITIONING")
     link(clip_id, 0, nid, 1, "CLIP")
+    frame_rate_id = get_bus(next_bus_id(), (pos[0] + 410, pos[1] - 70), "fps", "FLOAT")
+    link(frame_rate_id, 0, nid, 2, "FLOAT")
     return nid
 
 

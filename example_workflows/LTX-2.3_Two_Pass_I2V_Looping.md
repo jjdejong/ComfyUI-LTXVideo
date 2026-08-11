@@ -158,6 +158,12 @@ each late reference image branch. Each tile prompt is built as:
 global prompt + tile snippet
 ```
 
+Keep the global prompt limited to persistent identity, scene, lighting, style,
+audio, and any invariant ongoing action. Each tile snippet should describe
+visible subject motion, camera motion, and the desired end pose or framing. Do
+not mention tiles, preceding/next tiles, or reference images in the prompt text.
+Add `zhuanchang` at the end when the transition LoRA is intentionally active.
+
 Those tile prompts are joined with `|` and fed to one
 `LTXVMultiPromptProvider` shared by both looping samplers. The fallback
 positive text encoder is wired to the global prompt as well. When there are

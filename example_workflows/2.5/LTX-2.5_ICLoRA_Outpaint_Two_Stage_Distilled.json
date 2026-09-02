@@ -421,10 +421,10 @@
       "mode": 0,
       "inputs": [],
       "outputs": [],
-      "title": "How to use — Outpainting",
+      "title": "How to use \u2014 Outpainting",
       "properties": {},
       "widgets_values": [
-        "# How to Use Outpainting\n\nThis workflow supports **outpainting** (extending the canvas beyond the original frame). You provide a mask telling the model where to generate, and an optional prompt describing what should be there.\n\n## 1. No prompt = the simple case\n\n- without a prompt → just extends the existing canvas. The model fills the new area to match the surrounding scene.\n\n\n## 2. Prompts describe the scene, not the edit\n\nIt's not an edit tool. Write a regular T2V-style prompt describing the out-painting region.\n\n\n\n## 3. Green leftovers\n\nThe pipeline composites green under the mask before diffusion — sometimes traces leak through at mask edges. Try a bigger dilation, a different seed, or re-encode the mask losslessly or the blending parameter is very important."
+        "# How to Use Outpainting\n\nThis workflow supports **outpainting** (extending the canvas beyond the original frame). You provide a mask telling the model where to generate, and an optional prompt describing what should be there.\n\n## 1. No prompt = the simple case\n\n- without a prompt \u2192 just extends the existing canvas. The model fills the new area to match the surrounding scene.\n\n\n## 2. Prompts describe the scene, not the edit\n\nIt's not an edit tool. Write a regular T2V-style prompt describing the out-painting region.\n\n\n\n## 3. Green leftovers\n\nThe pipeline composites green under the mask before diffusion \u2014 sometimes traces leak through at mask edges. Try a bigger dilation, a different seed, or re-encode the mask losslessly or the blending parameter is very important."
       ],
       "color": "#432",
       "bgcolor": "#653"
@@ -448,7 +448,7 @@
       "title": "Model Links",
       "properties": {},
       "widgets_values": [
-        "## Model Links\n\n**LTX-2.5 Model Weights**\n\nMake sure to click the \"Agree and Access\" button the first time you download.\n\n- [ Distilled model - ltx-2.5-22b-distilled-transformer-bf16.safetensors ](https://huggingface.co/Lightricks/LTX-2.5/blob/main/diffusion_models/ltx-2.5-22b-distilled-transformer-bf16.safetensors)\n\n- [ IC-LoRA In/Outpainting - ltx-2.3-22b-ic-lora-in-outpainting-0.9.safetensors ](https://huggingface.co/Lightricks/LTX-2.3-22b-IC-LoRA-In-Outpainting/blob/main/ltx-2.3-22b-ic-lora-in-outpainting-0.9.safetensors)\n\n- [ Audio VAE - ltx-2.5-audio-vae-bf16.safetensors ](https://huggingface.co/Lightricks/LTX-2.5/blob/main/vae/ltx-2.5-audio-vae-bf16.safetensors)\n\n- Video VAE - one of these:\n  - [ Diffusion decoder ltx-2.5-video-vae-bf16.safetensors ](https://huggingface.co/Lightricks/LTX-2.5/blob/main/vae/ltx-2.5-video-vae-bf16.safetensors) - Best quality\n  - [ Convolutional decoder - ltx-2.5-video-vae-conv-bf16.safetensors ](https://huggingface.co/Lightricks/LTX-2.5/blob/main/vae/ltx-2.5-video-vae-conv-bf16.safetensors) - Lower memory & faster\n\n- [ Upscaler - ltx-2.3-spatial-upscaler-x2-1.1.safetensors ](https://huggingface.co/Lightricks/LTX-2.3/blob/main/ltx-2.3-spatial-upscaler-x2-1.1.safetensors)\n\n\n\n**Text Encoder - finetuned for LTX-2.5**\n- [gemma4-12b-with-proj-ltx-2.5-bf16.safetensors](https://huggingface.co/Lightricks/LTX-2.5/blob/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-bf16.safetensors)\n\n**Text Enhancer**\n- [Google Gemma 4 E2B IT](https://huggingface.co/Comfy-Org/gemma-4/blob/main/text_encoders/gemma4_e2b_it_bf16.safetensors)\n\n\n**Model Storage Location**\n\n```\n📂 ComfyUI/\n├── 📂 models/\n│   ├── 📂 text_encoders/\n│   │      ├── gemma4-12b-with-proj-ltx-2.5-bf16.safetensors\n│   │      └── gemma4_e2b_it_bf16.safetensors\n│   ├── 📂 loras/\n│   │      └── ltx-2.3-22b-ic-lora-in-outpainting-0.9.safetensors\n│   ├── 📂 diffusion_models/\n│   │      └── ltx-2.5-22b-distilled-transformer-bf16.safetensors\n│   ├── 📂 vae/\n│   │      └── ltx-2.5-audio-vae-bf16.safetensors\n│   │      └── ltx-2.5-video-vae-conv-bf16.safetensors / ltx-2.5-video-vae-bf16.safetensors\n│   ├── 📂 latent_upscale_models/\n│          └── ltx-2.3-spatial-upscaler-x2-1.1.safetensors\n```\n\n## Report Issues\nTo report any issues when running this workflow, [go to GitHub](https://github.com/Lightricks/ComfyUI-LTXVideo/issues)\n"
+        "## Model Links\n\n**LTX-2.5 Model Weights**\n\nMake sure to click the \"Agree and Access\" button the first time you download.\n\n- [ Distilled model - ltx-2.5-22b-distilled-transformer-bf16.safetensors ](https://huggingface.co/Lightricks/LTX-2.5/blob/main/diffusion_models/ltx-2.5-22b-distilled-transformer-bf16.safetensors)\n\n- [ IC-LoRA In/Outpainting - ltx-2.3-22b-ic-lora-in-outpainting-0.9.safetensors ](https://huggingface.co/Lightricks/LTX-2.3-22b-IC-LoRA-In-Outpainting/blob/main/ltx-2.3-22b-ic-lora-in-outpainting-0.9.safetensors)\n\n- [ Audio VAE - ltx-2.5-audio-vae-bf16.safetensors ](https://huggingface.co/Lightricks/LTX-2.5/blob/main/vae/ltx-2.5-audio-vae-bf16.safetensors)\n\n- Video VAE - one of these:\n  - [ Diffusion decoder ltx-2.5-video-vae-bf16.safetensors ](https://huggingface.co/Lightricks/LTX-2.5/blob/main/vae/ltx-2.5-video-vae-bf16.safetensors) - Best quality\n  - [ Convolutional decoder - ltx-2.5-video-vae-conv-bf16.safetensors ](https://huggingface.co/Lightricks/LTX-2.5/blob/main/vae/ltx-2.5-video-vae-conv-bf16.safetensors) - Lower memory & faster\n\n- [ Upscaler - ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors ](https://huggingface.co/Lightricks/LTX-2.5/blob/main/latent_upscale_models/ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors)\n\n\n\n**Text Encoder - finetuned for LTX-2.5**\n- [gemma4-12b-with-proj-ltx-2.5-bf16.safetensors](https://huggingface.co/Lightricks/LTX-2.5/blob/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-bf16.safetensors)\n\n**Text Enhancer**\n- [Google Gemma 4 E2B IT](https://huggingface.co/Comfy-Org/gemma-4/blob/main/text_encoders/gemma4_e2b_it_bf16.safetensors)\n\n\n**Model Storage Location**\n\n```\n\ud83d\udcc2 ComfyUI/\n\u251c\u2500\u2500 \ud83d\udcc2 models/\n\u2502   \u251c\u2500\u2500 \ud83d\udcc2 text_encoders/\n\u2502   \u2502      \u251c\u2500\u2500 gemma4-12b-with-proj-ltx-2.5-bf16.safetensors\n\u2502   \u2502      \u2514\u2500\u2500 gemma4_e2b_it_bf16.safetensors\n\u2502   \u251c\u2500\u2500 \ud83d\udcc2 loras/\n\u2502   \u2502      \u2514\u2500\u2500 ltx-2.3-22b-ic-lora-in-outpainting-0.9.safetensors\n\u2502   \u251c\u2500\u2500 \ud83d\udcc2 diffusion_models/\n\u2502   \u2502      \u2514\u2500\u2500 ltx-2.5-22b-distilled-transformer-bf16.safetensors\n\u2502   \u251c\u2500\u2500 \ud83d\udcc2 vae/\n\u2502   \u2502      \u2514\u2500\u2500 ltx-2.5-audio-vae-bf16.safetensors\n\u2502   \u2502      \u2514\u2500\u2500 ltx-2.5-video-vae-conv-bf16.safetensors / ltx-2.5-video-vae-bf16.safetensors\n\u2502   \u251c\u2500\u2500 \ud83d\udcc2 latent_upscale_models/\n\u2502          \u2514\u2500\u2500 ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors\n```\n\n## Report Issues\nTo report any issues when running this workflow, [go to GitHub](https://github.com/Lightricks/ComfyUI-LTXVideo/issues)\n"
       ],
       "color": "#432",
       "bgcolor": "#653"
@@ -496,7 +496,7 @@
       "title": "Preprocess",
       "properties": {},
       "widgets_values": [
-        "## Preprocess (stage 1)\n\nMasks the frames (`LTXVInpaintPreprocess`), builds the empty AV latent **at the reference video's size/length** (GetImageSize is here), conditions on the optional start image, injects the IC-LoRA guide, and adds **frozen audio** (VAEEncodeAudio → SetAudioRefTokens).\n\n*Frozen audio keeps the result consistent with the original sound; remove the audio stream if you don't want that guidance.*"
+        "## Preprocess (stage 1)\n\nMasks the frames (`LTXVInpaintPreprocess`), builds the empty AV latent **at the reference video's size/length** (GetImageSize is here), conditions on the optional start image, injects the IC-LoRA guide, and adds **frozen audio** (VAEEncodeAudio \u2192 SetAudioRefTokens).\n\n*Frozen audio keeps the result consistent with the original sound; remove the audio stream if you don't want that guidance.*"
       ],
       "color": "#432",
       "bgcolor": "#653"
@@ -1166,12 +1166,49 @@
         }
       ],
       "properties": {
-        "previewExposures": []
+        "previewExposures": [],
+        "models": [
+          {
+            "name": "ltx-2.5-audio-vae-bf16.safetensors",
+            "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+            "directory": "vae"
+          },
+          {
+            "name": "ltx-2.5-video-vae-bf16.safetensors",
+            "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+            "directory": "vae"
+          },
+          {
+            "name": "ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors",
+            "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/latent_upscale_models/ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors",
+            "directory": "latent_upscale_models"
+          },
+          {
+            "name": "gemma4_e2b_it_bf16.safetensors",
+            "url": "https://huggingface.co/Comfy-Org/gemma-4/resolve/main/text_encoders/gemma4_e2b_it_bf16.safetensors",
+            "directory": "text_encoders"
+          },
+          {
+            "name": "gemma4-12b-with-proj-ltx-2.5-bf16.safetensors",
+            "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-bf16.safetensors",
+            "directory": "text_encoders"
+          },
+          {
+            "name": "ltx-2.3-22b-ic-lora-in-outpainting-0.9.safetensors",
+            "url": "https://huggingface.co/Lightricks/LTX-2.3-22b-IC-LoRA-In-Outpainting/resolve/main/ltx-2.3-22b-ic-lora-in-outpainting-0.9.safetensors",
+            "directory": "loras"
+          },
+          {
+            "name": "ltx-2.5-22b-distilled-transformer-bf16.safetensors",
+            "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-bf16.safetensors",
+            "directory": "diffusion_models"
+          }
+        ]
       },
       "widgets_values": [
         "ltx-2.5-audio-vae-bf16.safetensors",
         "ltx-2.5-video-vae-bf16.safetensors",
-        "ltx-2.3-spatial-upscaler-x2-1.1.safetensors",
+        "ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors",
         "gemma4_e2b_it_bf16.safetensors",
         "gemma4-12b-with-proj-ltx-2.5-bf16.safetensors",
         "ltx-2.3-22b-ic-lora-in-outpainting-0.9.safetensors",
@@ -1402,7 +1439,7 @@
         0,
         457289196,
         1088,
-        "ltx-2.4-22b-distilled-rc2.safetensors"
+        "ltx-2.5-22b-distilled-transformer-bf16.safetensors"
       ]
     }
   ],
@@ -2092,7 +2129,14 @@
             ],
             "title": "Load VAE - Audio",
             "properties": {
-              "Node name for S&R": "VAELoader"
+              "Node name for S&R": "VAELoader",
+              "models": [
+                {
+                  "name": "ltx-2.5-audio-vae-bf16.safetensors",
+                  "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors",
+                  "directory": "vae"
+                }
+              ]
             },
             "widgets_values": [
               "ltx-2.5-audio-vae-bf16.safetensors"
@@ -2135,7 +2179,14 @@
             ],
             "title": "Load VAE - Video",
             "properties": {
-              "Node name for S&R": "VAELoader"
+              "Node name for S&R": "VAELoader",
+              "models": [
+                {
+                  "name": "ltx-2.5-video-vae-bf16.safetensors",
+                  "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors",
+                  "directory": "vae"
+                }
+              ]
             },
             "widgets_values": [
               "ltx-2.5-video-vae-bf16.safetensors"
@@ -2181,10 +2232,17 @@
             "properties": {
               "Node name for S&R": "LatentUpscaleModelLoader",
               "cnr_id": "comfy-core",
-              "ver": "0.14.1"
+              "ver": "0.14.1",
+              "models": [
+                {
+                  "name": "ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors",
+                  "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/latent_upscale_models/ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors",
+                  "directory": "latent_upscale_models"
+                }
+              ]
             },
             "widgets_values": [
-              "ltx-2.3-spatial-upscaler-x2-1.1.safetensors"
+              "ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors"
             ]
           },
           {
@@ -2224,10 +2282,17 @@
             ],
             "title": "Load CLIP - Text Enhancer",
             "properties": {
-              "Node name for S&R": "CLIPLoader"
+              "Node name for S&R": "CLIPLoader",
+              "models": [
+                {
+                  "name": "gemma4_e2b_it_bf16.safetensors",
+                  "url": "https://huggingface.co/Comfy-Org/gemma-4/resolve/main/text_encoders/gemma4_e2b_it_bf16.safetensors",
+                  "directory": "text_encoders"
+                }
+              ]
             },
             "widgets_values": [
-              "ViT-B-32.pt",
+              "gemma4_e2b_it_bf16.safetensors",
               "ltxv",
               "default"
             ]
@@ -2282,7 +2347,14 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "LTXICLoRALoaderModelOnly"
+              "Node name for S&R": "LTXICLoRALoaderModelOnly",
+              "models": [
+                {
+                  "name": "ltx-2.3-22b-ic-lora-in-outpainting-0.9.safetensors",
+                  "url": "https://huggingface.co/Lightricks/LTX-2.3-22b-IC-LoRA-In-Outpainting/resolve/main/ltx-2.3-22b-ic-lora-in-outpainting-0.9.safetensors",
+                  "directory": "loras"
+                }
+              ]
             },
             "widgets_values": [
               "ltx-2.3-22b-ic-lora-in-outpainting-0.9.safetensors",
@@ -2326,10 +2398,17 @@
             ],
             "title": "Load CLIP - Text Encoder",
             "properties": {
-              "Node name for S&R": "CLIPLoader"
+              "Node name for S&R": "CLIPLoader",
+              "models": [
+                {
+                  "name": "gemma4-12b-with-proj-ltx-2.5-bf16.safetensors",
+                  "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-bf16.safetensors",
+                  "directory": "text_encoders"
+                }
+              ]
             },
             "widgets_values": [
-              "ViT-B-32.pt",
+              "gemma4-12b-with-proj-ltx-2.5-bf16.safetensors",
               "ltxv",
               "default"
             ]
@@ -2370,7 +2449,14 @@
               }
             ],
             "properties": {
-              "Node name for S&R": "UNETLoader"
+              "Node name for S&R": "UNETLoader",
+              "models": [
+                {
+                  "name": "ltx-2.5-22b-distilled-transformer-bf16.safetensors",
+                  "url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-bf16.safetensors",
+                  "directory": "diffusion_models"
+                }
+              ]
             },
             "widgets_values": [
               "ltx-2.5-22b-distilled-transformer-bf16.safetensors",
@@ -4205,7 +4291,7 @@
                 ]
               }
             ],
-            "title": "🅛🅣🅧 Gemma API Text Encode - POSITIVE",
+            "title": "\ud83c\udd5b\ud83c\udd63\ud83c\udd67 Gemma API Text Encode - POSITIVE",
             "properties": {
               "Node name for S&R": "GemmaAPITextEncode"
             },
@@ -4269,7 +4355,7 @@
                 ]
               }
             ],
-            "title": "🅛🅣🅧 Gemma API Text Encode - NEGATIVE",
+            "title": "\ud83c\udd5b\ud83c\udd63\ud83c\udd67 Gemma API Text Encode - NEGATIVE",
             "properties": {
               "Node name for S&R": "GemmaAPITextEncode"
             },

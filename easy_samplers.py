@@ -12,7 +12,7 @@ from comfy_extras.nodes_lt import EmptyLTXVLatentVideo, LTXVAddGuide, LTXVCropGu
 
 from .guide import blur_internal
 from .latent_norm import LTXVAdainLatent
-from .latents import LTXVAddLatentGuide, LTXVSelectLatents
+from .latents import LTXVSelectLatents, add_latent_guide
 from .nodes_registry import comfy_node
 
 
@@ -321,7 +321,7 @@ class LTXVBaseSampler:
                 positive,
                 negative,
                 latents,
-            ) = LTXVAddLatentGuide().generate(
+            ) = add_latent_guide(
                 vae=vae,
                 positive=positive,
                 negative=negative,
@@ -587,7 +587,7 @@ class LTXVExtendSampler:
             positive,
             negative,
             new_latents,
-        ) = LTXVAddLatentGuide().generate(
+        ) = add_latent_guide(
             vae=vae,
             positive=positive,
             negative=negative,
@@ -650,7 +650,7 @@ class LTXVExtendSampler:
                 positive,
                 negative,
                 new_latents,
-            ) = LTXVAddLatentGuide().generate(
+            ) = add_latent_guide(
                 vae=vae,
                 positive=positive,
                 negative=negative,
@@ -665,7 +665,7 @@ class LTXVExtendSampler:
                 positive,
                 negative,
                 new_latents,
-            ) = LTXVAddLatentGuide().generate(
+            ) = add_latent_guide(
                 vae=vae,
                 positive=positive,
                 negative=negative,
@@ -703,7 +703,7 @@ class LTXVExtendSampler:
                 positive,
                 negative,
                 denoised_output_latents,
-            ) = LTXVAddLatentGuide().generate(
+            ) = add_latent_guide(
                 vae=vae,
                 positive=positive,
                 negative=negative,
@@ -925,7 +925,7 @@ class LTXVInContextSampler:
             positive,
             negative,
             new_latents,
-        ) = LTXVAddLatentGuide().generate(
+        ) = add_latent_guide(
             vae=vae,
             positive=positive,
             negative=negative,
@@ -961,7 +961,7 @@ class LTXVInContextSampler:
                 positive,
                 negative,
                 new_latents,
-            ) = LTXVAddLatentGuide().generate(
+            ) = add_latent_guide(
                 vae=vae,
                 positive=positive,
                 negative=negative,
